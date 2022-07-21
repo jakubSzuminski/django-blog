@@ -1,0 +1,65 @@
+{% extends "main/base.html" %} 
+
+{% block body-attrs %} 
+onload = "getPosts()"
+{% endblock %}
+
+{% block meta-description %}
+My personal blog.
+{% endblock %}
+
+{% block header %} 
+<div class="header-container">
+    <div class="blog-info-container">
+        <h1>Welcome to this blog!</h1>
+        <p class="blog-description">
+            Here goes the blog description, topics you write about, why you write about them, who you are. 
+        </p>
+    </div>  
+
+    <div class="blog-button">
+        <a href="{% url 'post-detail' slug='welcome-post' %}" id="welcome-post-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><title>Welcoming Hand</title><path d="M80 320V144a32 32 0 0132-32h0a32 32 0 0132 32v112M144 256V80a32 32 0 0132-32h0a32 32 0 0132 32v160M272 241V96a32 32 0 0132-32h0a32 32 0 0132 32v224M208 240V48a32 32 0 0132-32h0a32 32 0 0132 32v192" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><path d="M80 320c0 117.4 64 176 152 176s123.71-39.6 144-88l52.71-144c6.66-18.05 3.64-34.79-11.87-43.6h0c-15.52-8.82-35.91-4.28-44.31 11.68L336 320" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/></svg>
+            <p>Read the welcome post</p>
+        </a>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %} 
+<div id="homepage-container" class="container">
+    <div id="posts-container">
+        <h2 id="no-posts-found">No posts found</h2>
+
+        <!-- HERE JAVASCRIPT & DJANGO WILL ADD POSTS -->
+    </div>
+
+    <nav id="posts-nav">
+        <div class="posts-nav-group">
+            <h2>Search through all the posts</h2>
+            <div class="search-container">
+                <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><title>Search</title><path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M338.29 338.29L448 448"/></svg>
+                <input id="search" type="text" placeholder="Search">
+            </div>
+        </div>
+        
+        <div class="posts-nav-group">
+            <h2>Choose post topics</h2>
+            <div class="topic-tags">
+                {% for tag in tags %} 
+                {% if tag.id == tag_activated %}
+                <a href="{% url 'category' tag_slug='clear' %}" class="tag tag-active"> {{tag.name}} </a>
+                {% else %} 
+                <a href="{% url 'category' tag_slug=tag.slug %}" class="tag"> {{tag.name}} </a>
+                {% endif %}
+                {% endfor %} 
+            </div>
+        </div>
+    </nav>
+</div>
+{% endblock %}
+
+{% block scripts %} 
+{% load static %}
+<script src="{% static 'main/scripts/search.js' %}"></script>
+{% endblock %}
