@@ -1,0 +1,50 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Create your account</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="errors">
+            {{form.non_field_errors}}
+        </div>
+
+        <fieldset class="form-group">
+            <div class="field-wrapper">
+                {{form.username.errors}}
+                <label for="{{form.username.id_for_label">Username</label>
+                {{form.username}}
+            </div>
+
+            <div class="field-wrapper">
+                {{form.email.errors}}
+                <label for="{{form.email.id_for_label">Email</label>
+                {{form.email}}
+            </div>
+
+            <div class="field-wrapper">
+                {{form.password1.errors}}
+                <label for="{{form.password1.id_for_label">Password</label>
+                {{form.password1}}
+            </div>
+
+            <div class="field-wrapper">
+                {{form.password2.errors}}
+                <label for="{{form.password2.id_for_label">Confirm password</label>
+                {{form.password2}}
+            </div>
+        </fieldset>
+
+        <button class="btn btn-primary" type="submit">Sign Up</button>
+    </form>
+
+    <div class="form-additional-info">
+        <p>
+            Already have an account? 
+            <a href="{% url 'login' %}">Sign in instead</a>
+        </p>
+    </div>
+</div>
+
+{% endblock %}
