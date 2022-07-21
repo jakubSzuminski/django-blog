@@ -1,0 +1,38 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Login to your account</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="errors">
+            {{form.non_field_errors}}
+        </div>
+
+        <fieldset class="form-group">
+            <div class="field-wrapper">
+                {{form.username.errors}}
+                <label for="{{form.username.id_for_label">Username</label>
+                {{form.username}}
+            </div>
+
+            <div class="field-wrapper">
+                {{form.password.errors}}
+                <label for="{{form.password.id_for_label">Password</label>
+                {{form.password}}
+            </div>
+        </fieldset>
+
+        <button class="btn btn-primary" type="submit">Sign In</button>
+    </form>
+
+    <div class="form-additional-info">
+        <p>
+            Don't have an account?
+            <a href="{% url 'register' %}">Sign up instead</a>
+        </p>
+    </div>
+</div>
+
+{% endblock %}
