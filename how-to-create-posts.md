@@ -1,3 +1,13 @@
+# How to add posts
+Posts can be added from a Django admin account; if you don't have one - create one with
+```
+python manage.py createsuperuser 
+```
+Now, when running the server go to localhost:8000/admin (if you're running your site on your local machine) and go to Post object and click "add".
+
+## Fill in the Post information
+You need to give the post a title, write a short description, think of a slug (for example *welcome-post* or *my-favorite-movie*). Then fill in the content based on the principles described below:
+
 # Types of blocks
 - paragraphs
 - headlines (3 types)
