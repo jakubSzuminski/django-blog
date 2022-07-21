@@ -1,0 +1,50 @@
+{% extends "main/base.html" %} 
+
+{% block content %}
+
+<div class="post-view">
+    <h1>{{ post.title }}</h1>
+    
+    <p class="post-view-description">
+        {{ post.description }}
+    </p>
+    
+    {% autoescape off %}
+    {{ post.content }}
+    {% endautoescape %}
+</div>
+
+<div class="post-comments">
+    <h2>Comments</h2>
+    {% for comment in comments %} 
+    <div class="comment">
+        <div class="comment-info">
+            <h4>{{comment.author.username}}</h4>
+            <p>{{comment.created_on|date:"M d, Y"}}</p>
+            {% if comment.author == request.user %}
+            <a href="{% url 'comment-delete' comment_id=comment.id %}" class="delete-comment">Delete comment</a>
+            {% endif %}
+        </div>
+
+        <div class="comment-content">
+            <p>{{comment.text}}</p>
+        </div>
+    </div>
+    {% endfor %}
+
+    {% if user.is_authenticated %} 
+    <form method="POST">
+        {% csrf_token %}
+        <label for="id_text">Write your comment</label>
+        <textarea name="text" required id="id_text" cols="50" rows="8"></textarea>
+        <button class="btn btn-primary">Add comment</button>
+    </form>
+    {% else %}
+    <h3>
+        <a href="{% url 'login' %}">Sign in</a>
+        to write your comment
+    </h3>
+    {% endif %}
+</div>
+
+{% endblock %}
