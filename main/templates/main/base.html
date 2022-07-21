@@ -1,0 +1,118 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="{% block meta-description %} {% endblock %}">
+
+    <title>Blog Title</title>
+
+    <link rel="stylesheet" href="{% static 'main/styles/main.css' %}">
+</head>
+
+<body {% block body-attrs %} {% endblock %}>
+    <header>
+        <div class="nav-container" class="container">
+            <nav id="main-nav">
+                <a id="logo-text" href="{% url 'home-page' %}">Your-<span>Blog</span> <span class="minimize">title</span></a>
+    
+                <ul id="main-nav-list">
+                    <!-- <li class="search-container">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><title>Search</title><path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M338.29 338.29L448 448"/></svg>
+                        <input id="nav-search" class="search" type="text" placeholder="Search">
+                    </li> -->
+
+                    <li>
+                        <a href="{% url 'contact-page' %}">contact</a>
+                    </li>
+
+                    {% if user.is_authenticated %}
+                    <li>
+                        <a href="{% url 'logout' %}">logout</a>
+                    </li>
+                    {% else %}
+                    <li>
+                        <a id="main-nav-cta" href="{% url 'register' %}">join</a>
+                    </li>
+    
+                    <li>
+                        <a href="{% url 'login' %}">sign-in</a>
+                    </li>
+                    {% endif %}
+
+                </ul>
+
+                <ul id="mobile-nav-list">
+                    <button id="show-menu">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><title>Menu</title><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M80 160h352M80 256h352M80 352h352"/></svg>
+                    </button>
+
+                    <button id="hide-menu">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><title>Close</title><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M368 368L144 144M368 144L144 368"/></svg>
+                    </button>
+                </ul>
+            </nav>
+        </div>
+
+        <div id="sidebar-menu">
+            <ul id="sidebar-menu-list">
+                <!-- <li class="search-container">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><title>Search</title><path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M338.29 338.29L448 448"/></svg>
+                    <input id="nav-search" class="search" type="text" placeholder="Search">
+                </li> -->
+
+                <li>
+                    <a href="{% url 'contact-page' %}">contact</a>
+                </li>
+
+                {% if user.is_authenticated %}
+                <li>
+                    <a href="{% url 'logout' %}">logout</a>
+                </li>
+                {% else %}
+                <li>
+                    <a id="main-nav-cta" href="{% url 'register' %}">join</a>
+                </li>
+                <li>
+                    <a href="{% url 'login' %}">sign-in</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+
+        {% if messages %} 
+        <div class="message-container">
+            {% for message in messages %}
+            <div class="alert alert-{{message.tags}}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+
+        {% block header %}
+        {% endblock %}
+    </header>
+
+    <main>
+        {% block content %} 
+        {% endblock %}
+    </main>
+    
+    <footer>
+        <p>Your Blog - All Rights Reserved <span id="year"></span></p>
+        <a href="{% url 'contact-page' %}">Contact us for any additional information</a>
+    </footer>
+
+    {% block scripts %} 
+    {% endblock %}
+
+    <script src="{% static 'main/scripts/mobile_nav.js' %}"></script>
+</body>
+</html>
