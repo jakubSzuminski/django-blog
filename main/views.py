@@ -72,7 +72,7 @@ def search_posts(request):
             else:
                 posts = list(Post.objects.defer('content').filter(title__icontains = search_str).order_by('-created_on').values() | Post.objects.defer('content').filter(description__icontains = search_str).order_by('-created_on').values())
         else:
-            posts = list(Post.objects.defer('content').filter(tags__in = [tag]).order_by('-created_on').values()) if tag_id != False and tag_id != -1 else list(Post.objects.defer('content').all().values())
+            posts = list(Post.objects.defer('content').filter(tags__in = [tag]).order_by('-created_on').values()) if tag_id != False and tag_id != -1 else list(Post.objects.defer('content').all().order_by('-created_on').values())
 
         #adding tags to each post & formatting for javascript
         for post in posts:
