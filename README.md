@@ -85,6 +85,7 @@ Add all the url paths from the urls.py file in the repository.
 
 ## 8. Add all the views 
 8.1 Copy the main/views.py content to your main/views.py file 
+
 8.2 Copy the users/views.py content to your users/views.py file
 
 ## 9. You can add posts with basic HTML tags based on how-to-create-posts file in the repository.
