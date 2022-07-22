@@ -139,7 +139,8 @@ function getPosts(search_value=''){
                 
                 var post_title = document.createElement('h1');
                 var post_title_link = document.createElement('a');
-                post_title_link.setAttribute('href', `posts/${data[i].slug}`);
+                //AFTER DEPLOYMENT - CHANGE THAT TO THE DOMAIN NAME
+                post_title_link.setAttribute('href', `http://localhost:8000/posts/${data[i].slug}`);
                 post_title_link.textContent = `${data[i].title}`;
                 post_title.appendChild(post_title_link);
 
